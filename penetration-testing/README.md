@@ -32,4 +32,47 @@ The Consentual Photos vs Unsolicited Dick Pics
 -  tmux : Terminal multiplexers, expanding a standard Linux terminal's features, like having multiple windows within one terminal and jumping between them
 - Vim : the one with (Esc -> :q!)
 - nmap : Maps out the ports available for communication on a target device 
--  
+
+---
+# NMAP
+
+This tools scans the network ports for a target. default behaviour is to check the top most common 1000 ports for TCP operations. 
+`nmap <host:port>` means it will perform scan 
+Sample output :
+```
+PORT    STATE SERVICE
+21/tcp  open  ftp
+22/tcp  open  ssh
+80/tcp  open  http
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+```
+
+PORT -> port number and connection type  
+STATE -> can have values open, filtered(allowed only through some kind of a firewall) etc.  
+SERVICE -> name of the service running on the port 
+
+
+`-sC` : run scripts to try to get more information about the target   
+`--script <script name>` : run a specific script
+`-sV` : perform a version scan  
+`-p<port>` : scan a specific port 
+`-p-` : scan all the 65535 TCP ports  
+
+## Banner Grabbing 
+Often a service will look to identify itself by displaying a banner once a connection is initiated
+Using NMAP : `nmap -sV --script banner -p<port> <host>`  
+Using netcat : `nc -nv <host> <port>`  
+
+
+# Metasploit Framework 
+
+- Contains built-in exploits for publically available vulnerabilities 
+- Running reconnaissance scripts to enumerate remote hosts and compromised targets
+- Verification scripts to test the existence of a vulnerability without actually compromising the target
+- Meterpreter, which is a great tool to connect to shells and run commands on the compromised targets
+- Many post-exploitation and pivoting tools
+
+after searching for exploits you can `use` it.
+`options` shows multiple option available to exploit. Required parameters can be filled depending on the target host.
+`exploit` or `run` runs according to parameters configured. 
